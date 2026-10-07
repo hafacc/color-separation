@@ -32,7 +32,7 @@ export default function Footer({
         </Tooltip.Positioner>
       </Tooltip.Root>
       <a
-        href="https://github.com/hafaio/color-separation"
+        href="https://github.com/hafacc/color-separation"
         target="_blank"
         rel="noreferrer"
       >
