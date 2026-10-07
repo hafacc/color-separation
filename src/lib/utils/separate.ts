@@ -23,7 +23,10 @@ import {
 const SVG_UPDATE_END = SOLVER_FRACTION + (1 - SOLVER_FRACTION) * 0.4;
 
 const runRaster = createSender<RasterMessage, RasterOut>(
-  () => new Worker(new URL("./raster-worker.ts", import.meta.url)),
+  () =>
+    new Worker(new URL("./raster-worker.ts", import.meta.url), {
+      type: "module",
+    }),
   {
     transfer: ({ pool, renderPool }) => [
       pool.buffer as ArrayBuffer,
@@ -33,7 +36,10 @@ const runRaster = createSender<RasterMessage, RasterOut>(
 );
 
 const runEncode = createSender<EncodePayload, Blob>(
-  () => new Worker(new URL("./encode-worker.ts", import.meta.url)),
+  () =>
+    new Worker(new URL("./encode-worker.ts", import.meta.url), {
+      type: "module",
+    }),
   { reuse: true, transfer: ({ data }) => [data.buffer as ArrayBuffer] },
 );
 

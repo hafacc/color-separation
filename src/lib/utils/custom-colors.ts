@@ -14,7 +14,6 @@
  * used in `kubelka_munk` mode.
  */
 
-import { useCallback, useEffect, useState } from "react";
 import type { RgbU32 } from "./color";
 
 export interface CustomColor {
@@ -58,40 +57,4 @@ export function saveCustoms(customs: readonly CustomColor[]): void {
   } catch {
     // quota exceeded, storage disabled, etc. — best-effort only
   }
-}
-
-export interface CustomColorsApi {
-  readonly customs: readonly CustomColor[];
-  readonly addCustom: (color: CustomColor) => void;
-  readonly removeCustom: (rgb: RgbU32) => void;
-}
-
-export function useCustomColors(): CustomColorsApi {
-  // Start empty so SSR / first-paint markup matches; hydrate from storage in
-  // an effect. The palette modal is closed by default, so the user never sees
-  // the empty-then-populated transition.
-  const [customs, setCustoms] = useState<readonly CustomColor[]>([]);
-  useEffect(() => {
-    setCustoms(loadCustoms());
-  }, []);
-
-  const addCustom = useCallback((color: CustomColor) => {
-    setCustoms((prev) => {
-      if (prev.some((c) => c.rgb === color.rgb)) return prev;
-      const next = [...prev, color];
-      saveCustoms(next);
-      return next;
-    });
-  }, []);
-
-  const removeCustom = useCallback((rgb: RgbU32) => {
-    setCustoms((prev) => {
-      if (!prev.some((c) => c.rgb === rgb)) return prev;
-      const next = prev.filter((c) => c.rgb !== rgb);
-      saveCustoms(next);
-      return next;
-    });
-  }, []);
-
-  return { customs, addCustom, removeCustom };
 }

@@ -1,6 +1,5 @@
 import { expect, test } from "bun:test";
-import { renderToStaticMarkup } from "react-dom/server";
-import Logo from "../components/logo";
+import { TILES } from "./logo";
 
 /** Every rect as "x y width height fill", order-independent. */
 function rects(markup: string): Set<string> {
@@ -13,10 +12,15 @@ function rects(markup: string): Set<string> {
   return found;
 }
 
-// Next serves the favicon straight off disk, so it is a second copy of the
+// The favicon is served straight off disk, so it is a second copy of the
 // mark that nothing else would catch drifting.
 test("the favicon draws the same mark the app does", async () => {
-  const icon = rects(await Bun.file("app/icon.svg").text());
+  const icon = rects(await Bun.file("static/favicon.svg").text());
   expect(icon.size).toBeGreaterThan(0);
-  expect(rects(renderToStaticMarkup(Logo({ size: 62 })))).toEqual(icon);
+  const tiles = new Set(
+    TILES.map(([x, y, width, height, color]) =>
+      [x, y, width, height, color].join(" "),
+    ),
+  );
+  expect(tiles).toEqual(icon);
 });
