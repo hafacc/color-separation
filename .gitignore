@@ -3,7 +3,7 @@ node_modules
 tsconfig.tsbuildinfo
 coverage
 cache
-.next
+.svelte-kit
 .eslintcache
-out
+build
 *.un~

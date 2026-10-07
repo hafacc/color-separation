@@ -10,10 +10,9 @@
       "*.js",
       "*.json",
       "*.ts",
-      "app/*.tsx",
-      "app/*.css",
-      "components/*.tsx",
-      "utils/*.ts"
+      "src/**/*.ts",
+      "src/**/*.css",
+      "src/**/*.svelte"
     ],
     "ignoreUnknown": false
   },
@@ -42,5 +41,8 @@
         "organizeImports": "on"
       }
     }
+  },
+  "html": {
+    "experimentalFullSupportEnabled": true
   }
 }

@@ -9,7 +9,7 @@ function assetUrl(wasm: URL): string {
 }
 
 const mozjpegWasm = new URL(
-  "../node_modules/@jsquash/jpeg/codec/enc/mozjpeg_enc.wasm",
+  "../../../node_modules/@jsquash/jpeg/codec/enc/mozjpeg_enc.wasm",
   import.meta.url,
 );
 let jpegReady: Promise<void> | undefined;
@@ -19,7 +19,7 @@ function ensureJpeg(): Promise<void> {
 }
 
 const oxipngWasm = new URL(
-  "../node_modules/@jsquash/oxipng/codec/pkg/squoosh_oxipng_bg.wasm",
+  "../../../node_modules/@jsquash/oxipng/codec/pkg/squoosh_oxipng_bg.wasm",
   import.meta.url,
 );
 let oxipngReady: Promise<unknown> | undefined;
