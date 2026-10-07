@@ -22,17 +22,10 @@ jobs:
       - run: bun test
       - if: inputs.upload-pages
         uses: actions/configure-pages@v6
-      - uses: actions/cache@v6
-        with:
-          path: |
-            .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('bun.lockb') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('bun.lockb') }}-
       - run: bun export
         env:
-          NEXT_PUBLIC_BASE_PATH: ${{ inputs.upload-pages && format('/{0}', github.event.repository.name) || '' }}
+          BASE_PATH: ${{ inputs.upload-pages && format('/{0}', github.event.repository.name) || '' }}
       - if: inputs.upload-pages
         uses: actions/upload-pages-artifact@v5
         with:
-          path: ./out
+          path: ./build

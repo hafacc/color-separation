@@ -3,7 +3,10 @@ import type { MixingMode } from "./sep";
 import { type BulkMessage, type BulkResult, createSender } from "./worker-rpc";
 
 const runBulk = createSender<BulkMessage, BulkResult>(
-  () => new Worker(new URL("./bulksep-worker.ts", import.meta.url)),
+  () =>
+    new Worker(new URL("./bulksep-worker.ts", import.meta.url), {
+      type: "module",
+    }),
   {
     transfer: ({ pool, renderPool }) => [
       pool.buffer as ArrayBuffer,
