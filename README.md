@@ -1,10 +1,10 @@
 Color Separation
 ================
 
-[![deploy](https://github.com/hafaio/color-separation/actions/workflows/deploy.yml/badge.svg)](https://github.com/hafaio/color-separation/actions/workflows/deploy.yml)
+[![deploy](https://github.com/hafacc/color-separation/actions/workflows/deploy.yml/badge.svg)](https://github.com/hafacc/color-separation/actions/workflows/deploy.yml)
 
 A spot color separation webapp designed for risograph. Go to the
-[site](https://hafaio.github.io/color-separation) and start separating!
+[site](https://hafa.cc/color-separation) and start separating!
 
 Upload an image, pick the inks you can print, and it solves for how much of
 each ink every color needs, then hands back one grayscale layer per ink.
